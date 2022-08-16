@@ -1,0 +1,151 @@
+{
+  "project_info": {
+    "project_number": "537608532861",
+    "firebase_url": "https://smart-taxi-5d4d2-default-rtdb.firebaseio.com",
+    "project_id": "smart-taxi-5d4d2",
+    "storage_bucket": "smart-taxi-5d4d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537608532861:android:2e6f3ae60fe77c01b85214",
+        "android_client_info": {
+          "package_name": "wetch.smart.admin_smarcap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537608532861-5tn747q9p0rec9bhjcmr49d24kvluqsc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwjVHhuLGojZJu_32tKplk_2B0noheOmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537608532861-5tn747q9p0rec9bhjcmr49d24kvluqsc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537608532861:android:ff2882a503376091b85214",
+        "android_client_info": {
+          "package_name": "wetech.cap.smart_cap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537608532861-5tn747q9p0rec9bhjcmr49d24kvluqsc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwjVHhuLGojZJu_32tKplk_2B0noheOmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537608532861-5tn747q9p0rec9bhjcmr49d24kvluqsc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537608532861:android:4740aa7320eabfdab85214",
+        "android_client_info": {
+          "package_name": "wetech.karaz.user.karaz_user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537608532861-5tn747q9p0rec9bhjcmr49d24kvluqsc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwjVHhuLGojZJu_32tKplk_2B0noheOmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537608532861-5tn747q9p0rec9bhjcmr49d24kvluqsc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537608532861:android:63b82abed3371057b85214",
+        "android_client_info": {
+          "package_name": "wetech.smart.cap.smart_cap_user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537608532861-d9t9hs9erm8dj6dde52jmc5q1he6ea1t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wetech.smart.cap.smart_cap_user",
+            "certificate_hash": "84e05b0d1508111355961e6bd7ff6a1932047582"
+          }
+        },
+        {
+          "client_id": "537608532861-m8h6o1nr22ehtmmfr21e3hrulp14del8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wetech.smart.cap.smart_cap_user",
+            "certificate_hash": "005650a85b3d44b3ad989fbc567bd62bc0e67f9a"
+          }
+        },
+        {
+          "client_id": "537608532861-tnpoffsoq94dtc68luh8edlr3veu6u4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wetech.smart.cap.smart_cap_user",
+            "certificate_hash": "04ca2998cff45c550917cd7e190d13551539ce1d"
+          }
+        },
+        {
+          "client_id": "537608532861-5tn747q9p0rec9bhjcmr49d24kvluqsc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwjVHhuLGojZJu_32tKplk_2B0noheOmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537608532861-5tn747q9p0rec9bhjcmr49d24kvluqsc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
