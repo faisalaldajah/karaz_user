@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:karaz_user/Utilities/Constants/AppColors.dart';
 import 'package:karaz_user/globalvariable.dart';
 import 'package:karaz_user/screens/mainPage/main_page_controller.dart';
 import 'package:karaz_user/widgets/MainMenuWidget/MenuButton.dart';
@@ -39,27 +40,45 @@ class MainPage extends GetView<MainPageController> {
       body: Obx(
         () => Stack(
           children: <Widget>[
-            GoogleMap(
-              onCameraMove: ((CameraPosition position) {
-                //controller.lastMapPosition!.value = position.target;
-              }),
+            Container(
               padding:
                   EdgeInsets.only(bottom: controller.mapBottomPadding.value),
-              mapType: MapType.normal,
-              myLocationButtonEnabled: true,
-              initialCameraPosition: googlePlex,
-              myLocationEnabled: true,
-              zoomGesturesEnabled: true,
-              zoomControlsEnabled: true,
-              polylines: controller.polylines.value,
-              markers: controller.markers.value,
-              circles: controller.circles,
-              onMapCreated: (GoogleMapController? googleMapController) {
-                controller.googleMapController.complete(googleMapController);
-                controller.mapController!.value = googleMapController!;
-                controller.mapBottomPadding.value =
-                    (Platform.isAndroid) ? 280 : 270;
-              },
+              child: Stack(
+                children: [
+                  GoogleMap(
+                    onCameraMove: ((CameraPosition position) {
+                      print(position.target);
+                      // controller.lastMapPosition!.value = position.target;
+                      // print(controller.lastMapPosition!.value);
+                    }),
+                    mapType: MapType.normal,
+                    myLocationButtonEnabled: true,
+                    initialCameraPosition: googlePlex,
+                    myLocationEnabled: true,
+                    zoomGesturesEnabled: true,
+                    zoomControlsEnabled: true,
+                    polylines: controller.polylines.value,
+                    markers: controller.markers.value,
+                    circles: controller.circles,
+                    onMapCreated: (GoogleMapController? googleMapController) {
+                      controller.googleMapController
+                          .complete(googleMapController);
+                      controller.mapController!.value = googleMapController!;
+                      controller.mapBottomPadding.value =
+                          (Platform.isAndroid) ? 280 : 270;
+                    },
+                  ),
+                  (controller.locationOnMap.value)
+                      ? Center(
+                          child: Icon(
+                            Icons.location_pin,
+                            color: AppColors.primary,
+                            size: 30,
+                          ),
+                        )
+                      : Container()
+                ],
+              ),
             ),
 
             ///MenuButtonDraewr
@@ -90,15 +109,6 @@ class MainPage extends GetView<MainPageController> {
 
             /// TripSheet
             Positioned(left: 0, right: 0, bottom: 0, child: TripSheet()),
-
-            ///Location from map
-            (controller.locationOnMap.value)
-                ? Positioned(
-                    top: 225,
-                    right: 165,
-                    child: Image.asset('images/desticon.png'),
-                  )
-                : Container(),
           ],
         ),
       ),

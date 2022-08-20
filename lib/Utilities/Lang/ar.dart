@@ -646,5 +646,6 @@ const Map<String, String> ar = {
   'Amount above is the total fares to be charged to the driver':
       'المبلغ أعلاه هو إجمالي الأجرة التي سيتم تحصيلها من السائق',
   'PAY CASH': 'إدفع نقدا',
-  'Destination': 'الوجهة'
+  'Destination': 'الوجهة',
+  'history': 'السجل'
 };

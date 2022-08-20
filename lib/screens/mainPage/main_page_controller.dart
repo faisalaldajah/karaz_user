@@ -40,7 +40,7 @@ class MainPageController extends GetxController {
   Rx<Address> destinationAddress = Address().obs;
   Completer<GoogleMapController> googleMapController = Completer();
   TickerProvider? vsync;
-  RxDouble mapBottomPadding = 0.0.obs;
+  RxDouble mapBottomPadding = 50.0.obs;
   RxBool focused = false.obs;
   RxList<LatLng> polylineCoordinates = <LatLng>[].obs;
   RxSet<Polyline> polylines = <Polyline>{}.obs;
@@ -58,7 +58,7 @@ class MainPageController extends GetxController {
   StreamSubscription<DatabaseEvent>? rideSubscription;
   Rx<GoogleMapController>? mapController;
   List<NearbyDriver> availableDrivers = <NearbyDriver>[].obs;
-
+  Rx<LatLng>? lastMapPosition;
   RxBool nearbyDriversKeysLoaded = false.obs;
   RxString? adder;
   RxBool isRequestingLocationDetails = false.obs;
@@ -276,6 +276,7 @@ class MainPageController extends GetxController {
       'destination': destinationMap,
       'payment_method': 'card',
       'driver_id': 'waiting',
+      'riderID': currentUserInfo!.id,
     };
 
     rideRef.set(rideMap);

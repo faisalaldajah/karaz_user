@@ -667,5 +667,6 @@ const Map<String, String> en = {
   'Amount above is the total fares to be charged to the driver':
       'Amount above is the total fares to be charged to the driver',
   'PAY CASH': 'PAY CASH',
-  'Destination': 'Destination'
+  'Destination': 'Destination',
+  'history': 'History'
 };

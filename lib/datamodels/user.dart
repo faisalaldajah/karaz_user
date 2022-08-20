@@ -3,8 +3,9 @@ class UserData {
   String? email;
   String? phone;
   dynamic id;
+  String? personalImage;
 
-  UserData({this.fullname, this.email, this.phone, this.id});
+  UserData({this.fullname, this.email, this.phone, this.id, this.personalImage});
 
   UserData.fromJson(Map<String, dynamic> json) {
     fullname = json['fullname'];

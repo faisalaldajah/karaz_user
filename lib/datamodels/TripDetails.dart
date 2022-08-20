@@ -14,6 +14,7 @@ class TripDetails {
   String? riderName;
   String? riderPhone;
   String? status;
+  String? riderID;
 
   TripDetails(
       {this.carDetails,
@@ -30,6 +31,7 @@ class TripDetails {
       this.pickupAddress,
       this.riderName,
       this.riderPhone,
+      this.riderID,
       this.status});
 
   TripDetails.fromJson(Map<String, dynamic> json) {
@@ -54,6 +56,7 @@ class TripDetails {
     riderName = json['rider_name'];
     riderPhone = json['rider_phone'];
     status = json['status'];
+    riderID = json['riderID'];
   }
 
   Map<String, dynamic> toJson() {
@@ -79,6 +82,7 @@ class TripDetails {
     data['rider_name'] = riderName;
     data['rider_phone'] = riderPhone;
     data['status'] = status;
+    data['riderID'];
     return data;
   }
 }

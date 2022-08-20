@@ -29,10 +29,12 @@ class HelperMethods {
       if (snapshot.snapshot.value != null) {
         dynamic data = snapshot.snapshot.value;
         currentUserInfo = UserData(
-            id: data['id'],
-            fullname: data['fullname'],
-            email: data['email'],
-            phone: data['phone']);
+          id: data['id'],
+          fullname: data['fullname'],
+          email: data['email'],
+          phone: data['phone'],
+          personalImage: data['personalImage'],
+        );
         Get.to(() => MainPage(), binding: MainPageBinding());
       }
     });

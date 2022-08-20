@@ -8,7 +8,7 @@ import 'package:karaz_user/brand_colors.dart';
 import 'package:karaz_user/globalvariable.dart';
 import 'package:karaz_user/helpers/helpermethods.dart';
 import 'package:karaz_user/screens/mainPage/main_page_controller.dart';
-import 'package:karaz_user/screens/searchpage.dart';
+import 'package:karaz_user/screens/mainPage/searchpage.dart';
 import 'package:karaz_user/widgets/LocationPin.dart';
 
 class SearchSheet extends GetView<MainPageController> {
@@ -60,6 +60,7 @@ class SearchSheet extends GetView<MainPageController> {
                             await HelperMethods.findCordinateAddress(
                                 ps, context, '');
                         controller.showDetailSheet('');
+                        controller.locationOnMap.value = false;
                       },
                     )
                   : Column(
