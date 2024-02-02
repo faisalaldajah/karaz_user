@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
+import 'package:karaz_user/theme/app_colors.dart';
 
 class AppStyles {
   static BoxShadow primaryShadow = BoxShadow(

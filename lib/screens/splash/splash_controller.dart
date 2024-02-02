@@ -1,80 +1,77 @@
-import 'dart:io';
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
-import 'package:karaz_user/Services/AuthenticationService/Core/manager.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
-import 'package:karaz_user/globalvariable.dart';
-import 'package:karaz_user/helpers/helpermethods.dart';
-import 'package:karaz_user/screens/LogIn/login_binding.dart';
-import 'package:karaz_user/screens/LogIn/loginpage.dart';
-
-import '../../datamodels/address.dart';
-import '../../dataprovider/appdata.dart';
+import 'package:karaz_user/Utilities/app_constent.dart';
+import 'package:karaz_user/Utilities/general.dart';
+import 'package:karaz_user/Utilities/routes/routes_string.dart';
+import 'package:karaz_user/Utilities/tools/tools.dart';
+import 'package:karaz_user/controller/address.dart';
+import 'package:karaz_user/controller/app_user_controller.dart';
+import 'package:karaz_user/datamodels/app_user/app_user.dart';
+import 'package:karaz_user/main.dart';
 
 class SplashController extends GetxController {
-  AuthenticationManager authManager = Get.find();
-  Rx<Address> mainPickupAddress = Address().obs;
-  Rx<Address> destinationAddress = Address().obs;
+  final Connectivity _connectivity = Connectivity();
+
+  RxString appTitle = 'Taxico'.tr.obs;
+  bool? firstTime = false;
   @override
   void onInit() async {
-    if (await Permission.location.isDenied) {
-      print('object');
-      Geolocator.requestPermission();
-    }
-    if (await Permission.location.isGranted) {
-      await setupPositionLocator();
-      HelperMethods.getCurrentUserInfo();
-      try {
-        final result = await InternetAddress.lookup('google.com');
-        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
-      } on SocketException catch (_) {
-        authManager.commonTools.showFailedSnackBar('No internet connectivity');
-      }
-    }
     super.onInit();
+    // FirebaseAuth.instance.signOut();
+    Get.lazyPut<AddressController>(() => AddressController());
+    Get.lazyPut<AppUserController>(() => AppUserController());
+    firstTime = box.read(AppConstants.ONBOARDING);
+    final ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.wifi ||
+        connectivityResult == ConnectivityResult.mobile) {
+      _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+      await Get.find<AddressController>().getCurrentLocation();
+      if (firstTime == false || firstTime == null) {
+        Get.offAndToNamed(RoutesString.onboarding);
+        return;
+      }
+      // here check if user logged in
+      bool data = FirebaseAuth.instance.currentUser?.uid != null;
+      if (data) {
+        appUserData.value = await Get.find<AppUserController>()
+            .getUserDetails(FirebaseAuth.instance.currentUser!.uid)?? AppUserData();
+        Get.offAndToNamed(RoutesString.home);
+        return;
+      }
+      Get.offAndToNamed(RoutesString.welcome);
+    } else {
+      await checkMobileDataOrWifi(Get.context!);
+    }
   }
 
-  Future<void> setupPositionLocator() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
-    currentPosition = position;
-
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-
-    homeAddress.value =
-        placemarks[0].street! + '-' + placemarks[0].subLocality!;
-    homeAddresscheck.value = true;
-    mainPickupAddress.value.latitude = currentPosition!.latitude;
-    mainPickupAddress.value.longitude = currentPosition!.longitude;
-    mainPickupAddress.value.placeName = homeAddress.value;
-    Provider.of<AppData>(Get.context!, listen: false)
-        .updatePickupAddress(mainPickupAddress.value);
-    pos = LatLng(currentPosition!.latitude, currentPosition!.longitude);
-    googlePlex = CameraPosition(target: pos!, zoom: 14);
+  void _updateConnectionStatus(ConnectivityResult connectivityResult) async {
+    connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.wifi &&
+        connectivityResult != ConnectivityResult.mobile) {
+      Get.back();
+      await checkMobileDataOrWifi(Get.context!);
+      return;
+    }
   }
 
-  Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
-    Get.to(() => const LoginPage(), binding: LogInBinding());
-  }
-
-  Scaffold waitingView() {
-    return Scaffold(
-        backgroundColor: AppColors.backgroundColor,
-        body: Center(
-          child: SvgPicture.asset(
-            'images/karaz_logo.svg',
-            width: Get.width * 0.4,
-            height: Get.width * 0.4,
-          ),
-        ));
+  Future<bool> checkMobileDataOrWifi(BuildContext context) async {
+    appTools.showAlertDialogOneFun(
+      context,
+      onTap: () async {
+        Get.back();
+        ConnectivityResult connectivityResult =
+            await (Connectivity().checkConnectivity());
+        if (connectivityResult != ConnectivityResult.wifi &&
+            connectivityResult != ConnectivityResult.mobile) {
+          Get.back();
+          await checkMobileDataOrWifi(Get.context!);
+        }
+      },
+      content: 'Unfortunately You Are Not Connected'.tr,
+    );
+    return false;
   }
 }

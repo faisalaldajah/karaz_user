@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
-
+import 'package:karaz_user/theme/app_colors.dart';
 class PasswordRoleChecker extends StatelessWidget {
   const PasswordRoleChecker({
     required this.content,

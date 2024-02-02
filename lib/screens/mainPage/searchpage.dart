@@ -89,7 +89,7 @@ class SearchPage extends GetView<MainPageController> {
                         Center(
                           child: Text(
                             'Set Destination'.tr,
-                            style: Get.textTheme.headline3,
+                            style: Get.textTheme.displaySmall,
                           ),
                         ),
                       ],
@@ -117,7 +117,7 @@ class SearchPage extends GetView<MainPageController> {
                               padding: const EdgeInsets.all(2.0),
                               child: TextField(
                                 enabled: false,
-                                style: Get.textTheme.headline6,
+                                style: Get.textTheme.titleLarge,
                                 controller: controller.pickupController,
                                 decoration: InputDecoration(
                                     hintText: controller.mainPickupAddress.value
@@ -165,7 +165,7 @@ class SearchPage extends GetView<MainPageController> {
                                 },
                                 focusNode: focusDestination,
                                 controller: controller.destinationController,
-                                style: Get.textTheme.headline6,
+                                style: Get.textTheme.titleLarge,
                                 decoration: InputDecoration(
                                     hintText: 'Where you to go?'.tr,
                                     fillColor: BrandColors.colorLightGrayFair,

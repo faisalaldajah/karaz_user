@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
-
+import 'package:karaz_user/theme/app_colors.dart';
 class CustomBottomSheet extends StatelessWidget {
   final String title;
   final Widget child;

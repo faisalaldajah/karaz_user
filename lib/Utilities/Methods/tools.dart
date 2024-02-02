@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,8 +13,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:karaz_user/Services/translation_service.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
-import 'package:karaz_user/Utilities/Methods/AppStyles.dart';
+import 'package:karaz_user/theme/app_colors.dart';import 'package:karaz_user/Utilities/Methods/AppStyles.dart';
 import 'package:karaz_user/Utilities/Methods/UI.dart';
 import 'package:karaz_user/widgets/custom_bottom_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';

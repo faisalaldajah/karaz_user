@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
+import 'package:karaz_user/theme/app_colors.dart';import 'package:karaz_user/Utilities/images.dart';
 import 'package:karaz_user/brand_colors.dart';
 import 'package:karaz_user/globalvariable.dart';
 import 'package:karaz_user/helpers/firehelper.dart';
@@ -52,11 +52,10 @@ class RideDetailsSheet extends GetView<MainPageController> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     width: double.infinity,
-                    color: BrandColors.colorAccent1,
                     child: Row(
                       children: <Widget>[
                         Image.asset(
-                          'images/taxi1.png',
+                          ImagesAssets.uber,
                           height: 70,
                           width: 70,
                         ),
@@ -68,8 +67,7 @@ class RideDetailsSheet extends GetView<MainPageController> {
                           children: <Widget>[
                             Text(
                               'Taxi',
-                              style: Get.textTheme.headline4!
-                                  .copyWith(color: AppColors.white),
+                              style: Get.textTheme.headline4!,
                             ),
                             Text(
                               (controller.tripDirectionDetails.value
@@ -78,10 +76,7 @@ class RideDetailsSheet extends GetView<MainPageController> {
                                   ? controller
                                       .tripDirectionDetails.value.distanceText!
                                   : '',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: BrandColors.colorBackground,
-                              ),
+                              style: Get.textTheme.headline4!,
                             )
                           ],
                         ),
@@ -89,13 +84,12 @@ class RideDetailsSheet extends GetView<MainPageController> {
                           child: Container(),
                         ),
                         Text(
-                            (controller.tripDirectionDetails.value
-                                        .durationText !=
-                                    null)
-                                ? 'JD ${HelperMethods.estimateFares(controller.tripDirectionDetails.value)}'
-                                : '',
-                            style: Get.textTheme.headline4!
-                                .copyWith(color: AppColors.white)),
+                          (controller.tripDirectionDetails.value.durationText !=
+                                  null)
+                              ? 'JD ${HelperMethods.estimateFares(controller.tripDirectionDetails.value)}'
+                              : '',
+                          style: Get.textTheme.headline4!,
+                        ),
                       ],
                     ),
                   ),
@@ -113,11 +107,10 @@ class RideDetailsSheet extends GetView<MainPageController> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     width: double.infinity,
-                    color: BrandColors.colorAccent1,
                     child: Row(
                       children: <Widget>[
                         Image.asset(
-                          'images/taxi.png',
+                          ImagesAssets.uber,
                           height: 70,
                           width: 70,
                         ),
@@ -130,7 +123,7 @@ class RideDetailsSheet extends GetView<MainPageController> {
                             Text(
                               'Economy',
                               style: Get.textTheme.headline4!.copyWith(
-                                color: AppColors.white,
+                                color: AppColors.black,
                               ),
                             ),
                             Text(
@@ -140,8 +133,7 @@ class RideDetailsSheet extends GetView<MainPageController> {
                                   ? controller
                                       .tripDirectionDetails.value.distanceText!
                                   : '',
-                              style: Get.textTheme.headline4!
-                                  .copyWith(color: AppColors.white),
+                              style: Get.textTheme.headline4!,
                             )
                           ],
                         ),
@@ -154,7 +146,7 @@ class RideDetailsSheet extends GetView<MainPageController> {
                           style: const TextStyle(
                             fontSize: 18,
                             fontFamily: 'Brand-Bold',
-                            color: BrandColors.colorBackground,
+                            color: AppColors.black,
                           ),
                         ),
                       ],
@@ -164,10 +156,10 @@ class RideDetailsSheet extends GetView<MainPageController> {
                 const SizedBox(
                   height: 22,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
-                    children: const <Widget>[
+                    children: <Widget>[
                       Icon(
                         Icons.money,
                         size: 18,

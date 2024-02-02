@@ -14,7 +14,6 @@ class RequestSheet extends GetView<MainPageController> {
   Widget build(BuildContext context) {
     return Obx(
       () => AnimatedSize(
-        vsync: controller.vsync,
         duration: const Duration(milliseconds: 150),
         curve: Curves.easeIn,
         child: Container(

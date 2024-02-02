@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
-import '../brand_colors.dart';
+import 'package:karaz_user/theme/app_colors.dart';import '../brand_colors.dart';
 
 class GradientButton extends StatelessWidget {
   final String title;
@@ -23,9 +22,8 @@ class GradientButton extends StatelessWidget {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              BrandColors.colorAccent1,
-              BrandColors.colorAccent,
-              BrandColors.colorAccent1,
+              AppColors.primary,
+              AppColors.primary,
             ]),
         boxShadow: const [
           BoxShadow(
@@ -39,7 +37,7 @@ class GradientButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           title.tr,
-          style: Get.textTheme.headline4!.copyWith(color: AppColors.white),
+          style: Get.textTheme.headlineMedium!.copyWith(color: AppColors.white),
         ),
       ),
     );

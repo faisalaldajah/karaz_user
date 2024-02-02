@@ -6,9 +6,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:karaz_user/Services/AuthenticationService/Core/manager.dart';
+import 'package:karaz_user/Utilities/general.dart';
 import 'package:karaz_user/brand_colors.dart';
 import 'package:karaz_user/datamodels/address.dart';
 import 'package:karaz_user/datamodels/directiondetails.dart';
@@ -69,12 +71,19 @@ class MainPageController extends GetxController {
   @override
   Future<void> onInit() async {
     driverCarStyle = 'driversDetails';
-    mainPickupAddress.value.latitude = currentPosition!.latitude;
-    mainPickupAddress.value.longitude = currentPosition!.longitude;
-    mainPickupAddress.value.placeName = homeAddress.value;
+    mainPickupAddress.value.latitude = cureentAddress.value.latitude;
+    mainPickupAddress.value.longitude = cureentAddress.value.longitude;
+    getAddress();
     createMarker();
 
     super.onInit();
+  }
+
+  CameraPosition googleCameraPosition(LatLng latLng) {
+    return CameraPosition(
+      target: latLng,
+      zoom: 16.56,
+    );
   }
 
   @override
@@ -223,6 +232,7 @@ class MainPageController extends GetxController {
     if (status == 'Skip') {
       destinationAddress.value = Address();
     }
+    locationOnMap.value = true;
     await getDirection();
     searchSheetHeight.value = 0;
     mapBottomPadding.value = (Platform.isAndroid) ? 240 : 230;
@@ -231,6 +241,7 @@ class MainPageController extends GetxController {
   }
 
   void showRequestingSheet() {
+    locationOnMap.value = true;
     rideDetailsSheetHeight.value = 0;
     requestingSheetHeight.value = (Platform.isAndroid) ? 195 : 220;
     mapBottomPadding.value = (Platform.isAndroid) ? 200 : 190;
@@ -252,31 +263,30 @@ class MainPageController extends GetxController {
             .updateDestinationAddress(mainPickupAddress.value);
       }
     }
-    var pickup =
-        Provider.of<AppData>(Get.context!, listen: false).pickupAddress;
-    var destination =
-        Provider.of<AppData>(Get.context!, listen: false).destinationAddress;
+    locationOnMap.value = true;
+    var pickup = mainPickupAddress.value;
+    var destination = destinationAddress.value;
     Map pickupMap = {
-      'latitude': pickup!.latitude.toString(),
+      'latitude': pickup.latitude.toString(),
       'longitude': pickup.longitude.toString(),
     };
 
     Map destinationMap = {
-      'latitude': destination!.latitude.toString(),
+      'latitude': destination.latitude.toString(),
       'longitude': destination.longitude.toString(),
     };
 
     Map rideMap = {
       'created_at': DateTime.now().toString(),
-      'rider_name': currentUserInfo!.fullname,
-      'rider_phone': currentUserInfo!.phone,
+      'rider_name': appUserData.value.fullName,
+      'rider_phone': appUserData.value.phoneNumber,
       'pickup_address': pickup.placeName,
       'destination_address': destination.placeName,
       'location': pickupMap,
       'destination': destinationMap,
       'payment_method': 'card',
       'driver_id': 'waiting',
-      'riderID': currentUserInfo!.id,
+      'riderID': appUserData.value.id,
     };
 
     rideRef.set(rideMap);
@@ -578,5 +588,14 @@ class MainPageController extends GetxController {
         // driverDetails.add(driver);
       }));
     });
+  }
+
+  void getAddress() async {
+    List<Placemark> placemarks = await placemarkFromCoordinates(
+      mainPickupAddress.value.latitude!,
+      mainPickupAddress.value.longitude!,
+    );
+    mainPickupAddress.value.placeName = placemarks[0].name ?? '';
+    homeAddress.value = placemarks[0].name ?? '';
   }
 }

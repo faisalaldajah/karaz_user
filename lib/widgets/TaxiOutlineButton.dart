@@ -7,8 +7,7 @@ class TaxiOutlineButton extends StatelessWidget {
   final Function onPressed;
   final Color? color;
 
-  TaxiOutlineButton(
-      {required this.title, required this.onPressed, this.color});
+  TaxiOutlineButton({required this.title, required this.onPressed, this.color});
 
   @override
   Widget build(BuildContext context) {

@@ -1,15 +1,10 @@
-import 'dart:developer';
 import 'dart:io';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:karaz_user/Services/AuthenticationService/Core/manager.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
-import 'package:karaz_user/globalvariable.dart';
+import 'package:karaz_user/theme/app_colors.dart';import 'package:karaz_user/globalvariable.dart';
 import 'package:karaz_user/screens/mainPage/main_page_controller.dart';
-import 'package:multi_image_picker2/multi_image_picker2.dart';
-import 'package:path_provider/path_provider.dart';
 
 class TheDrawer extends StatelessWidget {
   TheDrawer({
@@ -60,23 +55,23 @@ class TheDrawer extends StatelessWidget {
                         right: 7,
                         child: GestureDetector(
                           onTap: () async {
-                            await selectFile();
-                            DatabaseReference imageRef =
-                                FirebaseDatabase.instance.ref().child(
-                                    'users/${currentFirebaseUser!.uid}/personalImage');
-                            personalImageUploadTask = storage
-                                .ref()
-                                .child(
-                                    'users/${Uri.file(personalImageFile.value.path).pathSegments.last}.jpg')
-                                .putFile(personalImageFile.value);
-                            String personalImageUploadTaskUrl =
-                                await (await personalImageUploadTask!)
-                                    .ref
-                                    .getDownloadURL()
-                                    .catchError((e) {
-                              log(e.toString());
-                            });
-                            imageRef.set(personalImageUploadTaskUrl);
+                            // await selectFile();
+                            // DatabaseReference imageRef =
+                            //     FirebaseDatabase.instance.ref().child(
+                            //         'users/${currentFirebaseUser!.uid}/personalImage');
+                            // personalImageUploadTask = storage
+                            //     .ref()
+                            //     .child(
+                            //         'users/${Uri.file(personalImageFile.value.path).pathSegments.last}.jpg')
+                            //     .putFile(personalImageFile.value);
+                            // String personalImageUploadTaskUrl =
+                            //     await (await personalImageUploadTask!)
+                            //         .ref
+                            //         .getDownloadURL()
+                            //         .catchError((e) {
+                            //   log(e.toString());
+                            // });
+                            // imageRef.set(personalImageUploadTaskUrl);
                           },
                           child: const Icon(
                             Icons.edit,
@@ -93,7 +88,7 @@ class TheDrawer extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         currentUserInfo!.fullname!,
-                        style: Get.textTheme.headline3,
+                        style: Get.textTheme.displaySmall,
                       ),
                       const SizedBox(
                         height: 5,
@@ -114,7 +109,7 @@ class TheDrawer extends StatelessWidget {
             ),
             title: Text(
               'PaymentMethod'.tr,
-              style: Get.textTheme.headline5,
+              style: Get.textTheme.headlineSmall,
             ),
           ),
           ListTile(
@@ -124,7 +119,7 @@ class TheDrawer extends StatelessWidget {
             ),
             title: Text(
               'history'.tr,
-              style: Get.textTheme.headline5,
+              style: Get.textTheme.headlineSmall,
             ),
           ),
           ListTile(
@@ -134,7 +129,7 @@ class TheDrawer extends StatelessWidget {
             ),
             title: Text(
               'support'.tr,
-              style: Get.textTheme.headline5,
+              style: Get.textTheme.headlineSmall,
             ),
           ),
           ListTile(
@@ -145,7 +140,7 @@ class TheDrawer extends StatelessWidget {
             ),
             title: Text(
               'logout'.tr,
-              style: Get.textTheme.headline5,
+              style: Get.textTheme.headlineSmall,
             ),
           ),
         ],
@@ -153,29 +148,29 @@ class TheDrawer extends StatelessWidget {
     );
   }
 
-  Future<void> selectFile() async {
-    List<Asset> profilePic1 = <Asset>[].obs;
-    await MultiImagePicker.pickImages(
-      maxImages: 1,
-      enableCamera: true,
-      selectedAssets: profilePic1,
-      cupertinoOptions: const CupertinoOptions(
-        takePhotoIcon: 'chat',
-      ),
-      materialOptions: const MaterialOptions(
-        actionBarColor: '#339A58',
-        statusBarColor: '#339A58',
-        allViewTitle: 'All Photos',
-        useDetailsView: false,
-        selectCircleStrokeColor: '#339A58',
-      ),
-    ).then((value) async {
-      var bytes = await value[0].getByteData();
-      String dir = (await getApplicationDocumentsDirectory()).path;
-      await authManager.commonTools
-          .writeToFile(bytes, '$dir/${value[0].name}.jpg');
-      File tempFile = File('$dir/${value[0].name}.jpg');
-      personalImageFile.value = tempFile;
-    });
-  }
+  // Future<void> selectFile() async {
+  //   List<Asset> profilePic1 = <Asset>[].obs;
+  //   await MultiImagePicker.pickImages(
+  //     maxImages: 1,
+  //     enableCamera: true,
+  //     selectedAssets: profilePic1,
+  //     cupertinoOptions: const CupertinoOptions(
+  //       takePhotoIcon: 'chat',
+  //     ),
+  //     materialOptions: const MaterialOptions(
+  //       actionBarColor: '#339A58',
+  //       statusBarColor: '#339A58',
+  //       allViewTitle: 'All Photos',
+  //       useDetailsView: false,
+  //       selectCircleStrokeColor: '#339A58',
+  //     ),
+  //   ).then((value) async {
+  //     var bytes = await value[0].getByteData();
+  //     String dir = (await getApplicationDocumentsDirectory()).path;
+  //     await authManager.commonTools
+  //         .writeToFile(bytes, '$dir/${value[0].name}.jpg');
+  //     File tempFile = File('$dir/${value[0].name}.jpg');
+  //     personalImageFile.value = tempFile;
+  //   });
+  // }
 }

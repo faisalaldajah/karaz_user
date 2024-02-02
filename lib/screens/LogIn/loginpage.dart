@@ -1,14 +1,16 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:karaz_user/Services/translation_service.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
 import 'package:karaz_user/screens/LogIn/login_controller.dart';
 import 'package:karaz_user/screens/SignUp/signUpView.dart';
 import 'package:karaz_user/screens/SignUp/signUp_binding.dart';
+import 'package:karaz_user/theme/app_colors.dart';
+import 'package:karaz_user/theme/text_themes.dart';
 import 'package:karaz_user/widgets/CustomizedTextField.dart';
-import 'package:karaz_user/widgets/GradientButton.dart';
 import 'package:flutter/material.dart';
+import 'package:karaz_user/widgets/primary_appbar.dart';
+import 'package:karaz_user/widgets/primary_button/primary_button.dart';
+import 'package:karaz_user/widgets/text/headline1.dart';
+import 'package:karaz_user/widgets/text/headline5.dart';
 
 class LoginPage extends GetView<LogInController> {
   static const String id = 'login';
@@ -18,6 +20,9 @@ class LoginPage extends GetView<LogInController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const PrimaryAppBar(
+        withBack: true,
+      ),
       backgroundColor: Colors.white,
       body: Form(
         key: controller.loginForm,
@@ -26,55 +31,32 @@ class LoginPage extends GetView<LogInController> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 25),
-                Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: IntrinsicHeight(
-                    child: Row(children: [
-                      InkWell(
-                        child: Text(
-                          'العربية',
-                          style: Get.theme.textTheme.headline1!.copyWith(
-                              fontSize: 15.0,
-                              color: TranslationService().isLocaleArabic()
-                                  ? AppColors.black
-                                  : AppColors.grey.withOpacity(0.5)),
-                        ),
-                        onTap: () {
-                          TranslationService().changeLocale('ar_SA');
-                        },
-                      ),
-                      const VerticalDivider(
-                        color: AppColors.black,
-                      ),
-                      InkWell(
-                          onTap: () {
-                            TranslationService().changeLocale('en_US');
-                          },
-                          child: Text(
-                            'English',
-                            style: Get.theme.textTheme.headline1!.copyWith(
-                                fontSize: 15.0,
-                                color: TranslationService().isLocaleArabic()
-                                    ? AppColors.grey.withOpacity(0.5)
-                                    : AppColors.black),
-                          )),
-                    ]),
-                  ).paddingSymmetric(horizontal: 42).marginOnly(top: 20),
+                const SizedBox(
+                  height: 16,
                 ),
-                const SizedBox(height: 40),
-                SvgPicture.asset(
-                  'images/karaz_logo.svg',
-                  width: 120,
-                  height: 120,
+                Center(
+                  child: Headline1(
+                    title: 'Taxico',
+                    style: TextThemeStyle().headline1.copyWith(
+                          color: AppColors.defaultBlack,
+                          fontSize: 60,
+                        ),
+                  ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 32,
                 ),
-                Text('Karaz',
-                    style: Get.textTheme.headline1!
-                        .copyWith(color: AppColors.primary, fontSize: 40)),
-                const SizedBox(height: 20),
+                Center(
+                  child: Headline5(
+                    title: 'Sign in your account',
+                    style: TextThemeStyle().headline5.copyWith(
+                          color: const Color.fromARGB(255, 118, 118, 120),
+                        ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
                 Obx(
                   () => Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -128,9 +110,9 @@ class LoginPage extends GetView<LogInController> {
                         const SizedBox(
                           height: 40,
                         ),
-                        GradientButton(
+                        PrimaryButton(
                           title: 'login',
-                          onPressed: () async {
+                          onTap: () async {
                             if (controller.loginForm.currentState!.validate()) {
                               controller.login();
                             } else {
@@ -148,7 +130,7 @@ class LoginPage extends GetView<LogInController> {
                   children: [
                     Text(
                       'don\'t have an account?'.tr,
-                      style: Get.textTheme.headline5!
+                      style: Get.textTheme.headlineSmall!
                           .copyWith(color: AppColors.grey),
                     ),
                     TextButton(
@@ -157,7 +139,7 @@ class LoginPage extends GetView<LogInController> {
                       },
                       child: Text(
                         '' + 'register now'.tr,
-                        style: Get.textTheme.headline4!.copyWith(
+                        style: Get.textTheme.headlineMedium!.copyWith(
                             color: Get.theme.primaryColor,
                             fontWeight: FontWeight.bold),
                       ),

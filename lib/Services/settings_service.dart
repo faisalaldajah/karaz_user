@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
+import 'package:karaz_user/theme/app_colors.dart';
 
 class SettingsService extends GetxService {
   Future<SettingsService> init() async {
@@ -11,7 +11,6 @@ class SettingsService extends GetxService {
 
   ThemeData getLightTheme() {
     return ThemeData(
-        backgroundColor: AppColors.white,
         primaryColor: AppColors.primary,
         hoverColor: AppColors.success,
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -26,80 +25,80 @@ class SettingsService extends GetxService {
         hintColor: AppColors.grey,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
               textStyle: const TextStyle(
                 fontWeight: FontWeight.w300,
-              ),
-              primary: Colors.white),
-        ),
-        colorScheme: const ColorScheme.light(
-          primary: AppColors.primary,
-          secondary: AppColors.secondary,
+              )),
         ),
         textTheme: GoogleFonts.getTextTheme(
           getLocale().toString().startsWith('ar') ? 'Cairo' : 'Poppins',
           const TextTheme(
-            headline6: TextStyle(
+            titleLarge: TextStyle(
                 overflow: TextOverflow.ellipsis,
                 fontSize: 14.0,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
                 height: 1.2),
-            headline5: TextStyle(
+            headlineSmall: TextStyle(
                 overflow: TextOverflow.ellipsis,
                 fontSize: 16.0,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
                 height: 1.2),
-            headline4: TextStyle(
+            headlineMedium: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
                 overflow: TextOverflow.ellipsis,
                 height: 1.2),
-            headline3: TextStyle(
+            displaySmall: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
                 overflow: TextOverflow.ellipsis,
                 height: 1.2),
-            headline2: TextStyle(
+            displayMedium: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
                 height: 1.2),
-            headline1: TextStyle(
+            displayLarge: TextStyle(
                 fontSize: 26.0,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
                 height: 1.2),
-            subtitle2: TextStyle(
+            titleSmall: TextStyle(
                 fontSize: 12.0,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
                 height: 1.2),
-            subtitle1: TextStyle(
+            titleMedium: TextStyle(
                 fontSize: 10.0,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
                 height: 1.2),
-            bodyText2: TextStyle(
+            bodyMedium: TextStyle(
               fontSize: 12.0,
               fontWeight: FontWeight.w300,
               color: AppColors.black,
               height: 1.4,
             ),
-            bodyText1: TextStyle(
+            bodyLarge: TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.w300,
                 color: AppColors.black,
                 height: 1.4),
-            caption: TextStyle(
+            bodySmall: TextStyle(
                 fontSize: 12.0,
                 fontWeight: FontWeight.w100,
                 color: AppColors.black,
                 height: 1.2),
           ),
-        ));
+        ),
+        colorScheme: const ColorScheme.light(
+          primary: AppColors.primary,
+          secondary: AppColors.secondary,
+        ).copyWith(background: AppColors.white));
   }
 
   Locale getLocale() {

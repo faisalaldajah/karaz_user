@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
+import 'package:karaz_user/theme/app_colors.dart';
 
 class UI {
   static GetSnackBar successSnackBar(
       {String title = 'success', String? message, int duration = 3}) {
     return GetSnackBar(
       titleText: Text(title.tr,
-          style: Get.textTheme.headline4!.merge(const TextStyle(
+          style: Get.textTheme.headlineMedium!.merge(const TextStyle(
               color: AppColors.white, fontWeight: FontWeight.w500))),
       messageText: Text(message!,
-          style: Get.textTheme.headline6!.merge(const TextStyle(
+          style: Get.textTheme.titleLarge!.merge(const TextStyle(
               color: AppColors.white, fontWeight: FontWeight.w500))),
       snackPosition: SnackPosition.BOTTOM,
       margin: const EdgeInsets.all(20),
@@ -34,10 +34,10 @@ class UI {
       {String title = 'failed', String? message, int duration = 5}) {
     return GetSnackBar(
       titleText: Text(title.tr,
-          style: Get.textTheme.headline4!.merge(const TextStyle(
+          style: Get.textTheme.headlineMedium!.merge(const TextStyle(
               color: AppColors.white, fontWeight: FontWeight.w500))),
       messageText: Text(message!,
-          style: Get.textTheme.headline6!.merge(const TextStyle(
+          style: Get.textTheme.titleLarge!.merge(const TextStyle(
               color: AppColors.white, fontWeight: FontWeight.w500))),
       snackPosition: SnackPosition.BOTTOM,
       margin: const EdgeInsets.all(20),
@@ -64,9 +64,9 @@ class UI {
     return InputDecoration(
       hintText: hintText,
       errorMaxLines: 3,
-      errorStyle: Get.theme.textTheme.bodyText2!
+      errorStyle: Get.theme.textTheme.bodyMedium!
           .copyWith(fontWeight: FontWeight.w500, color: Colors.red),
-      hintStyle: Get.theme.textTheme.bodyText2!.copyWith(
+      hintStyle: Get.theme.textTheme.bodyMedium!.copyWith(
           fontWeight: FontWeight.w500, color: AppColors.black.withOpacity(0.8)),
       prefixIcon: iconData != null
           ? Icon(iconData, color: Get.theme.focusColor).marginOnly(right: 14)

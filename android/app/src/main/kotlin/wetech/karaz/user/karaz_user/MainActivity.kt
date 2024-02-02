@@ -1,4 +1,4 @@
-package wetech.karaz.user.karaz_user
+package com.taxico.user
 
 import io.flutter.embedding.android.FlutterActivity
 

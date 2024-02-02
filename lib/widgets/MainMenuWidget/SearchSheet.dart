@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:karaz_user/Utilities/Constants/AppColors.dart';
-import 'package:karaz_user/brand_colors.dart';
+import 'package:karaz_user/theme/app_colors.dart';
 import 'package:karaz_user/globalvariable.dart';
 import 'package:karaz_user/helpers/helpermethods.dart';
 import 'package:karaz_user/screens/mainPage/main_page_controller.dart';
@@ -20,7 +19,6 @@ class SearchSheet extends GetView<MainPageController> {
   Widget build(BuildContext context) {
     return Obx(
       () => AnimatedSize(
-        vsync: controller.vsync,
         duration: const Duration(milliseconds: 150),
         curve: Curves.easeIn,
         child: Container(
@@ -74,7 +72,7 @@ class SearchSheet extends GetView<MainPageController> {
                             height: 5,
                             width: 50,
                             decoration: BoxDecoration(
-                                color: BrandColors.colorAccent.withOpacity(0.7),
+                                color: AppColors.primary.withOpacity(0.7),
                                 borderRadius: BorderRadius.circular(5)),
                           ),
                         ),
@@ -138,7 +136,7 @@ class SearchSheet extends GetView<MainPageController> {
                                   ),
                                   const Icon(
                                     Icons.location_on,
-                                    color: BrandColors.colorAccent1,
+                                    color: AppColors.primary,
                                     size: 26,
                                   ),
                                   const SizedBox(
@@ -189,7 +187,7 @@ class SearchSheet extends GetView<MainPageController> {
                                   ),
                                   const Icon(
                                     Icons.location_on,
-                                    color: BrandColors.colorAccent1,
+                                    color: AppColors.primary,
                                     size: 26,
                                   ),
                                   const SizedBox(
